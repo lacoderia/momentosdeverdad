@@ -3,13 +3,38 @@
 @import "common/variables"
 
 //Import typography
-
+@import "common/typography"
+@import "common/icomoon"
 
 // Import layout sytles
+@import "layout/header"
+@import "layout/footer"
 
+// Import external libraries
+@import "common/foundation.min"
 
 // Import modules styles
 
 
 body
-  background: $color_red_1
+  background: $color_red_1 !important
+  font-family: "Gotham" !important
+  margin: 0
+  padding: 0 0 40px
+  position: relative
+  z-index: 1
+
+  &:before
+    background: transparent url('/assets/background-desktop.png') no-repeat top left fixed
+    background-size: cover
+    content: ''
+    height: 100vh
+    left: 0
+    opacity: 0.1
+    position: fixed
+    top: 0
+    width: 100vw
+    z-index: -1
+
+h1, h2, h3, h4, h5, h6
+  font-family: "Gotham" !important
