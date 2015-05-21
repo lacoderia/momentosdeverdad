@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html ng-app="momentos">
 <head>
-  <title>Iuvare</title>
-  <meta name="viewport" content="width=device-width">
+  <title>Momentos de Verdad</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <base href="/">
+
   <%= stylesheet_link_tag    'application' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
-<bod ng-controller="RootController as rootCtrl">
+<body ng-controller="RootController as rootCtrl">
 
 <%= yield %>
 
-</bod>
+  <script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+
+</body>
 </html>
