@@ -29,9 +29,12 @@ end
 
 gem 'pg'
 gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'devise'
 gem 'newrelic_rpm'
 gem 'cloudinary'
 gem 'will_paginate'
+gem 'gmaps4rails'
+gem 'underscore-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

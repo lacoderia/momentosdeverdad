@@ -1,4 +1,15 @@
-class PlacesController < InheritedResources::Base
+class PlacesController < ApplicationController
+
+  def active
+    place = Place.find(params[:id])
+    if place
+      place.update_attribute(:active, params[:active])
+      render json: {:active => place}
+      return
+    else
+      render plain: "Error", status: 401
+    end
+  end
 
   private
 
