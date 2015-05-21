@@ -1,4 +1,15 @@
-class StoriesController < InheritedResources::Base
+class StoriesController < ApplicationController
+
+  def active
+    story = Story.find(params[:id])
+    if story
+      story.update_attribute(:active, params[:active])
+      render json: {:active => story}
+      return
+    else
+      render plain: "Error", status: 401
+    end
+  end
 
   private
 
