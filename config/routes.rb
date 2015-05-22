@@ -1,9 +1,22 @@
 Rails.application.routes.draw do
-  resources :places
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  resources :places do
+    member do
+      post 'active'
+    end
+  end
 
   resources :pictures
 
-  resources :stories
+  resources :stories do
+    member do
+      post 'active'
+    end
+    collection do
+      get 'by_place'
+    end
+  end
 
   resources :users
 
