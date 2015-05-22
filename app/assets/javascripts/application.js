@@ -15,6 +15,11 @@
 //= require bower_components/prefixfree/prefixfree.min
 //= require bower_components/modernizr/modernizr
 //= require bower_components/jquery/dist/jquery.min
+//= require vendor/fastclick
+//= require vendor/jquery.cookie
+//= require vendor/placeholder
+//= require vendor/foundation
+//= require vendor/foundation.dropdown
 //= require bower_components/moment/moment
 //= require bower_components/moment/locale/es
 
