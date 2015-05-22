@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     member do
       post 'active'
     end
+    collection do
+      get 'by_place'
+    end
   end
 
   resources :users
