@@ -24,6 +24,20 @@ class StoriesController < ApplicationController
     end
   end
 
+  def mark
+    story_id = params[:id]
+    real = params[:real]
+    if story_id && real
+      @success = true
+      @story = Story.mark(story_id, real)
+      render "mark.json"
+    else
+      @success = false
+      @error = "Falta uno o más parámetros para ejecutar esta acción"
+      render "mark.json", status: 500
+    end
+  end
+
   private
 
     def story_params

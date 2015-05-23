@@ -16,6 +16,7 @@ feature 'StoriesController' do
   end
 
   describe 'story services' do
+
     context 'get stories' do
       it 'gets stories by place correctly, gets stories by place with error' do
         story = Story.create(place_id: place.id, picture_id: picture.id, user_id: user.id, description: "test test", vote_plus: 10, vote_minus:5)
@@ -34,6 +35,29 @@ feature 'StoriesController' do
         expect(response['error']).to eql "Es necesario seleccionar un lugar para obtener los momentos de verdad"
       end
     end
+
+    context 'mark stories' do
+      it 'mark story as true, mark story as false' do
+        page1 = nil
+        page2 = nil
+        expect(story.vote_plus).to eql 10
+        with_rack_test_driver do
+          page1 = page.driver.post "#{stories_path}/#{story.id}/mark.json", {real: true}
+        end
+        response1 = JSON.parse(page1.body)
+        expect(response1['success']).to be true
+        expect(response1['result']['vote_plus']).to eql 11
+
+        expect(story.vote_minus).to eql 45
+        with_rack_test_driver do
+          page2 = page.driver.post "#{stories_path}/#{story.id}/mark.json", {real: false}
+        end
+        response2 = JSON.parse(page2.body)
+        expect(response2['success']).to be true
+        expect(response2['result']['vote_minus']).to eql 46
+      end
+    end
+
   end
 
 end
