@@ -1,5 +1,13 @@
 class PlacesController < ApplicationController
 
+  def available
+    @places = Place.available
+  end
+
+  def by_lat_long
+    @places = Place.by_lat_long params[:lat], params[:long]
+  end
+
   def active
     place = Place.find(params[:id])
     if place

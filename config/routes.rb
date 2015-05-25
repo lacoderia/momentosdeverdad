@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     member do
       post 'active'
     end
+    collection do
+      get 'by_lat_long'
+      get 'available'
+    end
   end
 
   resources :pictures
