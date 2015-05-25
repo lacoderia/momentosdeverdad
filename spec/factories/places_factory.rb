@@ -5,5 +5,6 @@ FactoryGirl.define do
     name "Local Polanco"
     longitude -74.01010
     latitude 12.1312311
+    ratio 0.1978
   end
 end
