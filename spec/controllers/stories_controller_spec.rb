@@ -20,11 +20,11 @@ feature 'StoriesController' do
     context 'get stories' do
       it 'gets stories by place correctly, gets stories by place with error' do
         story = Story.create(place_id: place.id, picture_id: picture.id, user_id: user.id, description: "test test", vote_plus: 10, vote_minus:5)
-        visit("/stories/by_place.json?place_id=1")
+        visit("/stories/by_place.json?place_id=202020")
         response = JSON.parse(page.body)
         expect(response['success']).to be true
         expect(response['result'].length).to eql 0
-        visit("/stories/by_place.json?place_id=2")
+        visit("/stories/by_place.json?place_id=#{place.id}")
         response = JSON.parse(page.body)
         expect(response['success']).to be true
         expect(response['result'].length).to eql 2
