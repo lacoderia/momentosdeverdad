@@ -1,4 +1,5 @@
 #= require active_admin/base
+//= require cloudinary
 //= require maps/active_admin_maps
 
 @activeStoryCheck = (story_id, active) ->
