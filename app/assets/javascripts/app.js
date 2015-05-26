@@ -2,7 +2,8 @@
 var momentos = angular.module('momentos',
     [
         'ngResource',
-        'ui.router'
+        'ui.router',
+        'mgcrea.ngStrap'
     ]
 );
 

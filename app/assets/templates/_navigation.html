@@ -1,16 +1,14 @@
 <div class="tools-section row">
-    <div class="small-12 large-6 columns place">
+    <div class="col-sm-12 col-md-6 col-lg-6 place">
         <img class="where-label" src="/assets/donde.png" alt="¿Dónde?">
         <div class="where-dropdown">
-            <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown">Dropdown Button</button><br>
-            <ul id="drop1" data-dropdown-content class="f-dropdown" aria-hidden="true">
-                <li><a href="#">This is a link</a></li>
-                <li><a href="#">This is another</a></li>
-                <li><a href="#">Yet another</a></li>
-            </ul>
+            <button type="button" class="btn btn-sm dropdown" data-animation="am-flip-x" bs-dropdown="placesDropdown" aria-haspopup="true" aria-expanded="false">
+                <span ng-if="!currentPlace">Dónde está sucediendo un momento de verdad</span>
+                <span ng-if="currentPlace">{{ currentPlace.name }}</span>
+            </button>
         </div>
     </div>
-    <div class="small-12 large-6 columns">
+    <div class="col-sm-12 col-md-6 col-lg-6">
         <nav class="navigation">
             <ul>
                 <li><a href="" class="action-button brown-button small-size">Comparte tu momento</a></li>

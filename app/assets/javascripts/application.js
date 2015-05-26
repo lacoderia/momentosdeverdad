@@ -28,8 +28,15 @@
 //= require bower_components/angular-resource/angular-resource.min
 //= require bower_components/ui-router/release/angular-ui-router.min
 //= require bower_components/angular-google-maps/dist/angular-google-maps.min
+//= require bower_components/angular-strap/dist/angular-strap.min.js
+//= require bower_components/angular-strap/dist/angular-strap.tpl.min.js
 
 //= require app
 
 // Controllers
 //= require controllers/RootController
+//= require controllers/MomentController
+
+// Services
+//= require services/MomentService
+//= require services/PlaceService
