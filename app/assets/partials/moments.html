@@ -2,16 +2,15 @@
     <ng-include src="'/assets/_navigation.html'"></ng-include>
     <div class="section-container row">
         <div class="col-sm-12 col-md-12 col-lg-12 moments">
-            <div class="moment">
-                <h3 class="moment-place">En: La cervecería del barrio</h3>
+            <div class="moment" ng-repeat="moment in moments">
+                <h3 class="moment-author">{{ moment.author_name }}</h3>
+                <h3 class="moment-place">En: {{ currentPlace.name }}</h3>
                 <div class="moment-desc">
                     <div class="moment-desc-text">
-                        <textarea>
-                            My money's in that office, right? If she start giving me some bullshit about it ain't there, and we got to go someplace else and get it, I'm gonna shoot you in the head then and there. Then I'm gonna shoot that bitch in the kneecaps, find out where my goddamn money is. She gonna tell me too. Hey, look at me when I'm talking to you, motherfucker. You listen: we go in there, and that nigga Winston or anybody else is in there, you the first motherfucker to get shot. You understand?
-                        </textarea>
+                        <textarea ng-bind="moment.description"></textarea>
                     </div>
                     <div class="moment-desc-image">
-                        <img src="/assets/background-desktop.jpg" alt="Desc imagen">
+                        <img ng-src="{{ moment.picture }}" alt="moment.author_name">
                     </div>
                 </div>
                 <div class="moment-actions">
