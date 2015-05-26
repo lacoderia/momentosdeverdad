@@ -11,7 +11,7 @@ momentos.factory('PlaceService', ['$http', '$q', function($http, $q){
 
                 if(data.success){
                     if(data.result){
-                        service.nearPlaces = data.result.nearPlaces;
+                        service.nearPlaces = data.result.places;
                     }
                 }
             });
