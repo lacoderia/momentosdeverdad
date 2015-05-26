@@ -58,6 +58,48 @@ feature 'StoriesController' do
       end
     end
 
+    context 'create story' do
+
+      it 'should create story successfuly' do
+
+        test_file = "moto.jpg" 
+        picture = Rack::Test::UploadedFile.new(Rails.root + "spec/images/#{test_file}", 'image/jpg')
+        
+        user = {name: "Ricardo Rosas", email: "test@starts.com"}
+        story = {place_id: place.id, user_attributes: user, picture: picture, description: "Description test"}
+        new_story_request = {story: story}
+        with_rack_test_driver do
+          page.driver.post "#{stories_path}.json", new_story_request
+        end
+
+        response = JSON.parse(page.body)
+        expect(response['success']).to be true
+        story = response['result']
+
+        expect(story['user']['email']).to eql "test@starts.com"
+        expect(User.last.email).to eql "test@starts.com"
+        expect(story['description']).to eql "Description test"
+        expect(story['picture']['id']).to be Picture.last.id
+
+        Cloudinary::Uploader.destroy(Story.last.picture.uid)
+      end
+
+      it 'should show errors on story creation' do        
+        
+        user = {name: "Ricardo Rosas", email: "test@starts.com"}
+        story = {place_id: place.id, user_attributes: user, description: "Description test"}
+        new_story_request = {story: story}
+        with_rack_test_driver do
+          page.driver.post "#{stories_path}.json", new_story_request
+        end
+
+        response = JSON.parse(page.body)
+        expect(response['success']).to be false
+        expect(response['error']).to eql "no implicit conversion of nil into String"
+      end
+
+    end
+
   end
 
 end
