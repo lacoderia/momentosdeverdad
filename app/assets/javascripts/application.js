@@ -36,7 +36,9 @@
 // Controllers
 //= require controllers/RootController
 //= require controllers/MomentController
+//= require controllers/ShareController
 
 // Services
 //= require services/MomentService
 //= require services/PlaceService
+//= require services/ShareService

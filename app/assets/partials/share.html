@@ -1,0 +1,35 @@
+<div class="container-fluid share-moment-container" ng-controller="ShareController as shareCtrl">
+    <ng-include src="'/assets/_navigation.html'"></ng-include>
+    <div class="section-container row">
+        <div class="col-sm-12 col-md-12 col-lg-12 share-moments">
+            <div class="moment">
+                <h3 class="moment-place">En: La cervecería del</h3>
+                <div class="moment-desc">
+                    <div class="moment-desc-text">
+                        <textarea placeholder="¿Qué nos vas a contar?"></textarea>
+                    </div>
+                    <div class="moment-desc-image" ng-click="openMomentPictureSelector($event)">
+                        <input type='file' accept="image/*" onchange="angular.element(this).scope().selectMomentPicture(this)" name="picture" enctype="multipart/form-data" runat="server" style="display: none"/>
+                        <div class="picture-container">
+                            <div class="default-picture">
+                                CAMARITA
+                            </div>
+                            <div class="picture">
+                                <img src="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="moment-actions">
+                    <div class="moment-action-vote">
+                        <span>¿Es verdad?</span> <span class="like-score">0</span> <span class="icon icon-upvote-like-icon-tm"></span> <span class="dislike-score">0</span> <span class="icon icon-upvote-dislike-icon-tm"></span>
+                    </div>
+                    <div class="moment-action-share">
+                        <span>Compartir</span>
+                        <span class="icon icon-share"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
