@@ -2,7 +2,7 @@
     <ng-include src="'/assets/_navigation.html'"></ng-include>
     <div class="section-container row">
         <div class="col-sm-12 col-md-12 col-lg-12 moments">
-            <div class="moment" ng-repeat="moment in moments">
+            <div class="moment" ng-repeat="moment in moments" ng-if="!isMomentsEmpty()">
                 <h3 class="moment-author">{{ moment.author_name }}</h3>
                 <h3 class="moment-place">En: {{ currentPlace.name }}</h3>
                 <div class="moment-desc">
@@ -15,12 +15,21 @@
                 </div>
                 <div class="moment-actions">
                     <div class="moment-action-vote">
-                        <span>¿Es verdad?</span> <span class="like-score" ng-bind="moment.vote_plus"></span> <span class="icon icon-upvote-like-icon-tm" ng-click="like(moment)"></span> <span class="dislike-score" ng-bind="moment.vote_minus"></span> <span class="icon icon-upvote-dislike-icon-tm" ng-click="dislike(moment)"></span>
+                        <span>¿Es verdad?</span>
+                        <span class="like-score" ng-bind="moment.vote_plus"></span> <span class="icon icon-like" ng-class="{ voted:!canVote(moment) }" ng-click="like(moment)"></span>
+                        <span class="dislike-score" ng-bind="moment.vote_minus"></span> <span class="icon icon-dislike" ng-class="{ voted:!canVote(moment) }" ng-click="dislike(moment)"></span>
                     </div>
                     <div class="moment-action-share">
                         <span>Compartir</span>
-                        <span class="icon icon-share"></span>
+                        <span class="icon icon-46-facebook share"></span>
+                        <span class="icon icon-twitter share"></span>
                     </div>
+                </div>
+            </div>
+            <div class="moment" ng-if="isMomentsEmpty()">
+                <div class="message">
+                    <p>Se el primero en compartir tu momento en este lugar.</p>
+                    <a ui-sref="share" class="action-button brown-button small-size">Comparte tu momento</a>
                 </div>
             </div>
         </div>

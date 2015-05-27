@@ -1,6 +1,6 @@
 'use strict';
 
-momentos.factory('MomentService', ['$http', '$q', 'DEFAULTS_VALUES', function($http, $q, DEFAULTS_VALUES){
+momentos.factory('MomentService', ['$http', '$q', function($http, $q){
 
     var getMomentsByPlaceId = function(placeId){
 
@@ -12,6 +12,9 @@ momentos.factory('MomentService', ['$http', '$q', 'DEFAULTS_VALUES', function($h
                 if(data.success){
                     if(data.result){
                         service.moments = data.result;
+                        angular.forEach(service.moments, function(moment){
+                            moment.voted = false;
+                        });
                     }
                 }
             });
@@ -25,35 +28,40 @@ momentos.factory('MomentService', ['$http', '$q', 'DEFAULTS_VALUES', function($h
         service.moments = moments;
     };
 
-    var like = function(momentId){
+    var like = function(moment){
 
-        var serviceURL = '/stories/' + momentId + '/mark.json';
+        var serviceURL = '/stories/' + moment.id + '/mark.json';
 
         return $http.post(serviceURL, {
-            real: true
+            real: "true"
         })
             .success(function(data){
 
                 if(data.success){
-                    console.log('like')
+                    if(data.result){
+                        moment.vote_plus++;
+                        moment.voted = true;
+                    }
                 }
             });
     };
 
-    var dislike = function(momentId){
+    var dislike = function(moment){
 
-        var serviceURL = '/stories/' + momentId + '/mark.json';
+        var serviceURL = '/stories/' + moment.id + '/mark.json';
 
         return $http.post(serviceURL, {
-            real: false
+            real: "false"
         })
             .success(function(data){
 
                 if(data.success){
-                    console.log('dislike')
+                    if(data.result){
+                        moment.vote_minus++;
+                        moment.voted = true;
+                    }
                 }
             });
-
     };
 
     var service = {
@@ -62,7 +70,7 @@ momentos.factory('MomentService', ['$http', '$q', 'DEFAULTS_VALUES', function($h
         getMoments: getMoments,
         setMoments: setMoments,
         like: like,
-        dislike: dislike
+        dislike: dislike,
     };
 
     return service;

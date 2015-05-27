@@ -25,6 +25,7 @@ body
   margin: 0
   padding: 0 0 66px
   position: relative
+  user-select: none
   z-index: 1
 
   &:before
@@ -46,8 +47,9 @@ textarea
   resize: none
 
 .action-button
-  text-transform: uppercase
+  display: inline-block
   font-weight: normal
+  text-transform: uppercase
 
   &:hover
     text-decoration: none
@@ -98,6 +100,15 @@ textarea
 
 .main-section
   padding: 1rem 0rem
+
+.message
+  color: white
+  font-size: 16px
+  text-align: center
+  text-transform: uppercase
+
+  p
+    margin: 16px 0
 
 .section-container
   margin: 48px auto
