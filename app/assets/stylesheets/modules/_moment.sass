@@ -1,0 +1,142 @@
+.moment-container
+  max-width: $width-max
+  margin: 0 auto
+  
+  .moments
+  
+    .moment
+      background: $color_red_1
+      box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.5)
+      margin-bottom: 16px
+      padding: 32px
+
+      .moment-author
+        color: $color_brown_1
+        font-size: 18px
+        margin-bottom: 0px
+        text-transform: uppercase
+        font-weight: 500
+
+      .moment-place
+        color: $color_brown_1
+        font-size: 14px
+        margin: 8px 0 32px 0
+        text-transform: uppercase
+        font-weight: normal
+  
+      .moment-desc
+        font-size: 0
+  
+        .moment-desc-text
+          background-color: white
+          display: inline-block
+          margin-right: 2%
+          vertical-align: top
+          width: 68%
+  
+          textarea
+            background: transparent
+            border: none
+            color: #0E0B12
+            font-size: 14px
+            font-weight: normal
+            min-height: 170px
+            padding: 16px
+            width: 100%
+  
+        .moment-desc-image
+          background-color: white
+          display: inline-block
+          vertical-align: top
+          width: 30%
+  
+          img
+            padding: 4px
+            width: 100%
+  
+
+      .moment-actions
+        color: $color_brown_2
+        font-size: 0
+        margin-top: 48px
+        text-align: right
+        text-transform: uppercase
+        vertical-align: middle
+  
+        .icon
+          font-size: 24px
+          transition: background-color 0.5s ease
+  
+        .moment-action-vote
+          display: inline-block
+          font-size: 16px
+          margin-right: 2%
+          vertical-align: top
+          width: 68%
+  
+          span
+            display: inline-block
+            vertical-align: middle
+  
+            &.icon-like
+              background-color: green
+              border-radius: 50%
+              color: white
+              font-size: 20px
+              margin-left: 6px
+              padding: 10px
+
+              &.voted
+                background-color: #004a00
+                opacity: 0.6
+
+
+              &:hover
+
+                &:not(.voted)
+                  background-color: #004a00
+                  cursor: pointer
+
+
+            &.icon-dislike
+              background-color: red
+              border-radius: 50%
+              color: white
+              font-size: 20px
+              margin-left: 6px
+              padding: 10px
+
+              &.voted
+                background-color: #b10000
+                opacity: 0.6
+
+              &:hover
+
+                &:not(.voted)
+                  background-color: #b10000
+                  cursor: pointer
+
+          .like-score
+            margin-left: 16px
+  
+          .dislike-score
+            margin-left: 8px
+  
+
+        .moment-action-share
+          display: inline-block
+          font-size: 16px
+          margin-top: 8px
+          vertical-align: top
+          width: 30%
+  
+          span
+            display: inline-block
+            vertical-align: middle
+  
+            &.share
+              cursor: pointer
+              margin-left: 6px
+
+              &:hover
+                color: #3ba3c4
