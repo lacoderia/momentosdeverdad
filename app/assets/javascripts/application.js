@@ -41,4 +41,3 @@
 // Services
 //= require services/MomentService
 //= require services/PlaceService
-//= require services/ShareService

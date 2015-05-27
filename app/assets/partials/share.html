@@ -3,8 +3,14 @@
     <div class="section-container row">
         <div class="col-sm-12 col-md-12 col-lg-12 share-moments">
             <div class="moment">
-                <h3 class="moment-place">En: La cervecería del</h3>
                 <div class="moment-desc">
+                    <form novalidate name="momentForm" class="form">
+                        <div class="moment-desc-text">
+                            <input type="text" placeholder="Nombre" name="name" ng-model="newMoment.name" required>
+                            <input type="email" placeholder="Email" name="name" ng-model="newMoment.email" required>
+                        </div>
+                    </form>
+
                     <div class="moment-desc-text">
                         <textarea placeholder="¿Qué nos vas a contar?"></textarea>
                     </div>
@@ -20,12 +26,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="message" ng-show="momentForm.$submitted || momentForm.profileFirstName.$touched">
+                    <span ng-show="momentForm.name.$error.required">El nombre es requerido.</span>
+                </div>
                 <div class="moment-actions">
                     <div class="moment-action-vote">
                         <span>¿Es verdad?</span> <span class="like-score">0</span> <span class="icon icon-upvote-like-icon-tm"></span> <span class="dislike-score">0</span> <span class="icon icon-upvote-dislike-icon-tm"></span>
                     </div>
-                    <div class="moment-action-share">
-                        <span>Compartir</span>
+                    <div class="moment-action-share" ng-click="saveMoment()">
+                        <span>Guardar</span>
                         <span class="icon icon-share"></span>
                     </div>
                 </div>

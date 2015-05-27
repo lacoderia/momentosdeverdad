@@ -20,6 +20,24 @@ momentos.factory('MomentService', ['$http', '$q', 'DEFAULTS_VALUES', function($h
             });
     };
 
+    var saveMoment = function(newMoment){
+        var serviceURL = '/stories.json';
+
+        var moment = {
+            place_id: newMoment.place.id,
+            description: newMoment.description,
+            picture: newMoment.picture,
+            user_attributes: {
+                name: newMoment.name,
+                email: newMoment.email
+            }
+        };
+
+        return $http.post(serviceURL, {
+            story: moment
+        });
+    };
+
     var getMoments = function(){
         return service.moments;
     };
@@ -31,6 +49,7 @@ momentos.factory('MomentService', ['$http', '$q', 'DEFAULTS_VALUES', function($h
     var service = {
         moments: [],
         getMomentsByPlaceId: getMomentsByPlaceId,
+        saveMoment: saveMoment,
         getMoments: getMoments,
         setMoments: setMoments
     };
