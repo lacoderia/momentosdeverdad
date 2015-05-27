@@ -1,5 +1,23 @@
 class StoriesController < ApplicationController
 
+  def create
+    @story = Story.new(story_params.except(:picture))
+    begin
+      #picture
+      image = Cloudinary::Uploader.upload(story_params[:picture], :width => 450, :height => 450, :crop => :fill)
+      picture = Picture.new
+      picture.update_attributes({:source => image["url"], :uid => image["public_id"]})
+      @story.picture = picture
+
+      @story.save!
+      render 'create.json'
+    rescue Exception => e 
+      @error = e.message
+      render 'create.json', status: 500
+    end
+    
+  end
+
   def active
     story = Story.find(params[:id])
     if story
@@ -39,9 +57,9 @@ class StoriesController < ApplicationController
   end
 
   private
-
+  
     def story_params
-      params.require(:story).permit(:place_id, :picture_id, :user_id, :description, :vote_plus, :vote_minus, :active)
+      params.require(:story).permit(:place_id, :picture_id, :user_id, :description, :vote_plus, :vote_minus, :active, :picture, user_attributes: [:name, :email, :id])
     end
 end
 
