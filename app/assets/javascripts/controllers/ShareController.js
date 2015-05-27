@@ -28,7 +28,9 @@ momentos.controller('ShareController', ["$state", "$scope", "$rootScope", "Momen
     };
 
     $scope.selectMomentPicture = function(element) {
+
         var input = $(element);
+
         if (input[0].files && input[0].files[0]) {
             var reader = new FileReader();
 
@@ -54,6 +56,34 @@ momentos.controller('ShareController', ["$state", "$scope", "$rootScope", "Momen
                         image.width(imageContainer.width());
                         image.height(imageContainer.width() / ratio);
                     }
+
+                    loadImage.parseMetaData(
+                        input[0].files[0],
+                        function (data) {
+                            var orientation = data.exif.get('Orientation');
+                            switch (orientation) {
+                                case 1:
+                                    break;
+                                case 2:
+                                    break;
+                                case 3:
+                                    imageContainer.addClass('rotate-right-180');
+                                case 4:
+                                    imageContainer.addClass('rotate-left-180');
+                                case 5:
+                                    imageContainer.addClass('rotate-left-90');
+                                case 6:
+                                    imageContainer.addClass('rotate-right-90');
+                                case 7:
+                                    imageContainer.addClass('rotate-left-270');
+                                case 8:
+                                    imageContainer.addClass('rotate-right-270');
+                                default:
+                                    break;
+
+                            }
+                        }
+                    );
                 }
 
             };
@@ -63,14 +93,30 @@ momentos.controller('ShareController', ["$state", "$scope", "$rootScope", "Momen
     };
 
     $scope.saveMoment = function(){
-        MomentService.saveMoment($scope.newMoment)
-            .success(function(data){
-                console.log(data);
-                $state.go('home');
-            })
-            .error(function(response){
-                console.log(response)
-            });
+
+        $scope.momentForm.$setSubmitted();
+
+        if($scope.momentForm.$valid && $scope.newMoment.picture && $scope.place.id){
+            var moment = {
+                place_id: $scope.newMoment.place.id,
+                description: $scope.newMoment.description,
+                picture: $scope.newMoment.picture,
+                user_attributes: {
+                    name: $scope.newMoment.name,
+                    email: $scope.newMoment.email
+                }
+            };
+
+            MomentService.saveMoment(moment)
+                .success(function(data){
+                    console.log(data);
+                    $state.go('home');
+                })
+                .error(function(response){
+                    console.log(response)
+                });
+        }
+
     };
 
 

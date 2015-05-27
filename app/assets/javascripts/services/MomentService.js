@@ -20,18 +20,8 @@ momentos.factory('MomentService', ['$http', '$q', 'DEFAULTS_VALUES', function($h
             });
     };
 
-    var saveMoment = function(newMoment){
+    var saveMoment = function(moment){
         var serviceURL = '/stories.json';
-
-        var moment = {
-            place_id: newMoment.place.id,
-            description: newMoment.description,
-            picture: newMoment.picture,
-            user_attributes: {
-                name: newMoment.name,
-                email: newMoment.email
-            }
-        };
 
         return $http.post(serviceURL, {
             story: moment

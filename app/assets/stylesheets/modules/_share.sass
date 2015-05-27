@@ -18,6 +18,9 @@
   
       .moment-desc
         font-size: 0
+
+        form
+          font-size: 14px
   
         .moment-desc-text
           background-color: $color-brown_1
@@ -63,12 +66,31 @@
               position: relative
               width: 220px
 
+              &.rotate-right-90
+                transform: rotate(90deg)
+
+              &.rotate-right-180
+                transform: rotate(180deg)
+
+              &.rotate-right-270
+                transform: rotate(270deg)
+
+              &.rotate-left-90
+                transform: rotate(-90deg)
+
+              &.rotate-left-180
+                transform: rotate(-180deg)
+
+              &.rotate-left-270
+                transform: rotate(-270deg)
+
               img
                 position: absolute
                 left: 50%
                 top: 50%
                 transform: translateY(-50%) translateX(-50%)
-  
+
+
       .moment-actions
         color: $color_brown_2
         font-size: 0
@@ -82,32 +104,7 @@
           border-radius: 50%
           font-size: 32px
   
-        .moment-action-vote
-          display: inline-block
-          font-size: 16px
-          margin-right: 2%
-          vertical-align: top
-          width: 68%
-  
-          span
-            display: inline-block
-            vertical-align: middle
-  
-            &.icon-upvote-like-icon-tm
-              margin-left: 6px
-              color: green
-  
-            &.icon-upvote-dislike-icon-tm
-              margin-left: 6px
-              color: red
-  
-          .like-score
-            margin-left: 16px
-  
-          .dislike-score
-            margin-left: 8px
-  
-        .moment-action-share
+        .moment-action-save
           display: inline-block
           font-size: 16px
           vertical-align: top

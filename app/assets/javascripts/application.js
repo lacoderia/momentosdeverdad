@@ -20,6 +20,7 @@
 //= require vendor/placeholder
 //= require vendor/foundation
 //= require vendor/foundation.dropdown
+//= require vendor/jquery.rotate.1-1
 //= require bower_components/moment/moment
 //= require bower_components/moment/locale/es
 
@@ -30,6 +31,7 @@
 //= require bower_components/angular-google-maps/dist/angular-google-maps.min
 //= require bower_components/angular-strap/dist/angular-strap.min.js
 //= require bower_components/angular-strap/dist/angular-strap.tpl.min.js
+//= require bower_components/blueimp-load-image/js/load-image.all.min
 
 //= require app
 
