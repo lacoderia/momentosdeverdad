@@ -10,9 +10,45 @@ momentos.controller('MomentController', ["$scope", "$rootScope", "MomentService"
     // Variables privadas
     var places = [];
 
+    // Función que regresa sí hay o no momentos
+    $scope.isMomentsEmpty = function(){
+        return (!$scope.moments.length)? true : false;
+    };
+
     // Función que selecciona el lugar actual
     $scope.setPlace = function (index) {
         $scope.currentPlace = places[index];
+        refreshMoments($scope.currentPlace);
+    };
+
+    $scope.canVote = function(moment){
+        return (moment.voted)? false : true;
+    };
+
+    // Función que vota a favor de un momento
+    $scope.like = function(moment){
+        if($scope.canVote(moment)){
+            MomentService.like(moment)
+                .success(function(data){
+
+                })
+                .error(function(error){
+                    console.log('Error al votar a favor de un momento')
+                });
+        }
+    };
+
+    //Función que vota en contra de un momento
+    $scope.dislike = function(moment){
+        if($scope.canVote(moment)) {
+            MomentService.dislike(moment)
+                .success(function (data) {
+
+                })
+                .error(function (error) {
+                    console.log('Error al votar en contra de un momento')
+                });
+        }
     };
 
     var refreshMoments = function(place) {
