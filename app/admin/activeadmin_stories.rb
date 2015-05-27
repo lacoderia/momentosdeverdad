@@ -2,25 +2,37 @@ ActiveAdmin.register Story, :as => "Historias" do
   
   actions :all, :except => [:destroy]
 
-  permit_params :active, :place_id, :picture_id, :user_id, :description, :vote_plus, :vote_minus, user_attributes: [:name, :email, :id], picture_attributes: [:source, :uid, :id]
+  permit_params :active, :place_id, :picture_id, :user_id, :description, :vote_plus, :vote_minus, picture_attributes: [:source, :uid, :id], user_attributes: [:name, :email, :id]
 
   filter :place
   config.sort_order = 'id_desc'  
 
+  after_create do |story|
+    story.picture.update_attribute(:source, "http://res.cloudinary.com/#{Cloudinary.config.cloud_name}/#{story.picture.source}")
+  end
+
   controller do
-    def update 
+    def update  
       @story = Story.find(permitted_params[:id])
       if permitted_params[:story][:picture_attributes][:id] and not permitted_params[:story][:picture_attributes][:source]
         @story.update_attributes(permitted_params[:story].except("picture_attributes"))
       else
         @story.update_attributes(permitted_params[:story])
       end
+      @story.picture.update_attribute(:source, "http://res.cloudinary.com/#{Cloudinary.config.cloud_name}/#{@story.picture.source}")
       redirect_to admin_historia_path(@story.id)
     end
   end
 
   form do |f| 
 
+    f.inputs "Picture" do
+      f.object.build_picture if not f.object.picture
+      f.semantic_fields_for :picture do |picture_form|
+        picture_form.cl_image_upload :source
+      end
+    end
+    
     f.inputs "Detalle de Historia" do
       f.input :description
       f.input :vote_plus
@@ -36,13 +48,7 @@ ActiveAdmin.register Story, :as => "Historias" do
         user_form.input :email
       end
     end
-
-    f.inputs "Picture" do
-      f.object.build_picture if not f.object.picture
-      f.semantic_fields_for :picture do |picture_form|
-        picture_form.cl_image_upload :source
-      end
-    end
+ 
     f.actions
     
   end
@@ -56,7 +62,7 @@ ActiveAdmin.register Story, :as => "Historias" do
         story.place.name
       end
       row :picture, :class => "photo_thumb" do 
-        link_to( (image_tag "http://res.cloudinary.com/#{Cloudinary.config.cloud_name}/#{story.picture.source}"), "http://res.cloudinary.com/#{Cloudinary.config.cloud_name}/#{story.picture.source}", :target=>"_blank" )
+        link_to( (image_tag "#{story.picture.source}"), "#{story.picture.source}", :target=>"_blank" )
       end
       row :active
     end
@@ -70,7 +76,7 @@ ActiveAdmin.register Story, :as => "Historias" do
       story.place.name
     end
     column :picture, :class => "photo_thumb" do |story|
-      link_to( (image_tag "http://res.cloudinary.com/#{Cloudinary.config.cloud_name}/#{story.picture.source}"), "http://res.cloudinary.com/#{Cloudinary.config.cloud_name}/#{story.picture.source}", :target=>"_blank" )
+      link_to( (image_tag "#{story.picture.source}"), "#{story.picture.source}", :target=>"_blank" )
     end
     column :description
     column :vote_plus
