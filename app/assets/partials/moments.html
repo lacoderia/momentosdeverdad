@@ -15,7 +15,7 @@
                 </div>
                 <div class="moment-actions">
                     <div class="moment-action-vote">
-                        <span>¿Es verdad?</span> <span class="like-score">0</span> <span class="icon icon-upvote-like-icon-tm"></span> <span class="dislike-score">0</span> <span class="icon icon-upvote-dislike-icon-tm"></span>
+                        <span>¿Es verdad?</span> <span class="like-score" ng-bind="moment.vote_plus"></span> <span class="icon icon-upvote-like-icon-tm" ng-click="like(moment)"></span> <span class="dislike-score" ng-bind="moment.vote_minus"></span> <span class="icon icon-upvote-dislike-icon-tm" ng-click="dislike(moment)"></span>
                     </div>
                     <div class="moment-action-share">
                         <span>Compartir</span>

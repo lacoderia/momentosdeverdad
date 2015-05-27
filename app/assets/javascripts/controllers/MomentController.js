@@ -15,6 +15,14 @@ momentos.controller('MomentController', ["$scope", "$rootScope", "MomentService"
         $scope.currentPlace = places[index];
     };
 
+    $scope.like = function(moment){
+        MomentService.like(moment.id);
+    };
+
+    $scope.dislike = function(moment){
+        MomentService.dislike(moment.id);
+    };
+
     var refreshMoments = function(place) {
         //Se obtiene los lugares del lugar actual
         MomentService.getMomentsByPlaceId(place.id)

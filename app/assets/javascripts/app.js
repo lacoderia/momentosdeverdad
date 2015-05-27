@@ -6,12 +6,6 @@ var momentos = angular.module('momentos',
         'mgcrea.ngStrap'
     ]
 );
-//{Cloudinary.config.cloud_name}/#{story.picture.source}
-momentos.constant('DEFAULTS_VALUES', {
-    CLOUDINARY_CLOUD_NAME: 'hi1a8tiol',
-    CLOUDINARY_URL: 'http://res.cloudinary.com/'
-});
-
 
 momentos.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', function ($stateProvider, $locationProvider, $urlRouterProvider) {
 
@@ -32,5 +26,9 @@ momentos.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', fu
             authenticationRequired: false
         });
 
+}]);
+
+momentos.config(['$httpProvider', function($httpProvider){
+    $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
 }]);
 
