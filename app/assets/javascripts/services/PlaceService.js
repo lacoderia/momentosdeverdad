@@ -1,6 +1,7 @@
 'use strict';
 
 momentos.factory('PlaceService', ['$http', '$q', function($http, $q){
+    var currentPlace = undefined;
 
     var getPlacesByLatLon = function(lat, lon){
 
@@ -41,13 +42,27 @@ momentos.factory('PlaceService', ['$http', '$q', function($http, $q){
         return service.nearPlaces;
     };
 
+    var getPlace = function(place){
+        currentPlace = undefined;
+
+        for(var indexPlace=0; indexPlace < service.places.length; indexPlace++){
+            if(service.places[indexPlace].id == place.id){
+                currentPlace = service.places[indexPlace];
+                break;
+            }
+        }
+
+        return currentPlace;
+    };
+
     var service = {
         places: [],
         nearPlaces: [],
         getPlacesByLatLon: getPlacesByLatLon,
         getAllPlaces: getAllPlaces,
         getPlaces: getPlaces,
-        getNearPlaces: getNearPlaces
+        getNearPlaces: getNearPlaces,
+        getPlace: getPlace
     }
 
     return service;

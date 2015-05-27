@@ -20,9 +20,19 @@ momentos.factory('MomentService', ['$http', '$q', 'DEFAULTS_VALUES', function($h
             });
     };
 
+    var getMoments = function(){
+        return service.moments;
+    };
+
+    var setMoments = function(moments){
+        service.moments = moments;
+    };
+
     var service = {
         moments: [],
-        getMomentsByPlaceId: getMomentsByPlaceId
+        getMomentsByPlaceId: getMomentsByPlaceId,
+        getMoments: getMoments,
+        setMoments: setMoments
     };
 
     return service;
