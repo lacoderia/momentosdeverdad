@@ -1,8 +1,9 @@
 <div class="container-fluid moment-container" ng-controller="MomentController as momentCtrl">
+    <span us-spinner="{fullOverlay: true, position: 'fixed'}" spinner-key="global-spinner" spinner-start-active="true"></span>
     <ng-include src="'/assets/_navigation.html'"></ng-include>
     <div class="section-container row">
         <div class="col-sm-12 col-md-12 col-lg-12 moments">
-            <div class="moment" ng-repeat="moment in moments" ng-if="!isMomentsEmpty()">
+            <div class="moment" ng-repeat="moment in moments" ng-if="!isMomentsEmpty() && !loadingMoments">
                 <h3 class="moment-author">{{ moment.author_name }}</h3>
                 <h3 class="moment-place">En: {{ currentPlace.name }}</h3>
                 <div class="moment-desc">
@@ -26,11 +27,14 @@
                     </div>
                 </div>
             </div>
-            <div class="moment" ng-if="isMomentsEmpty()">
+            <div class="moment" ng-if="isMomentsEmpty() && !loadingMoments">
                 <div class="message">
                     <p>Se el primero en compartir tu momento en este lugar.</p>
                     <a ui-sref="share" class="action-button brown-button small-size">Comparte tu momento</a>
                 </div>
+            </div>
+            <div class="moment" ng-if="loadingMoments">
+                <span us-spinner="{color: '#FFF'}" spinner-key="load-moments-spinner"></span>
             </div>
         </div>
     </div>

@@ -4,7 +4,8 @@ var momentos = angular.module('momentos',
         'ngResource',
         'ui.router',
         'mgcrea.ngStrap',
-        'facebook'
+        'facebook',
+        'angularSpinner'
     ]
 );
 

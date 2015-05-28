@@ -1,6 +1,6 @@
 'use strict';
 
-momentos.controller('MomentController', ["$scope", "$rootScope", "$location", "$window", "MomentService", "PlaceService", function($scope, $rootScope, $location, $window, MomentService, PlaceService){
+momentos.controller('MomentController', ["$scope", "$rootScope", "$location", "$timeout", "usSpinnerService", "MomentService", "PlaceService", function($scope, $rootScope, $location, $timeout, usSpinnerService, MomentService, PlaceService){
 
     // Variables públicas
     $scope.placesDropdown = [];
@@ -53,6 +53,11 @@ momentos.controller('MomentController', ["$scope", "$rootScope", "$location", "$
     };
 
     var refreshMoments = function(place) {
+        $scope.loadingMoments = true;
+        $timeout(function(){
+            usSpinnerService.spin('load-moments-spinner');
+        }, 0);
+
         //Se obtiene los lugares del lugar actual
         MomentService.getMomentsByPlaceId(place.id)
             .success(function(data){
@@ -66,6 +71,10 @@ momentos.controller('MomentController', ["$scope", "$rootScope", "$location", "$
             .error(function(error){
                 console.log('Error al obtener los momentos de un lugar');
                 console.log(error)
+            })
+            .finally(function(){
+                $scope.loadingMoments = false;
+                usSpinnerService.stop('load-moments-spinner');
             });
     };
 
@@ -75,6 +84,10 @@ momentos.controller('MomentController', ["$scope", "$rootScope", "$location", "$
         places = PlaceService.getPlaces();
 
         if(places.length){
+            $timeout(function(){
+                usSpinnerService.stop('global-spinner');
+            }, 0);
+
             angular.forEach(places, function(place, $index){
                 $scope.placesDropdown.push({
                     "text": place.name,
