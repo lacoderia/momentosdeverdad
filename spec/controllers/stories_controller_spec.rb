@@ -18,6 +18,17 @@ feature 'StoriesController' do
   describe 'story services' do
 
     context 'get stories' do
+      it 'gets story by ID, get story by ID with error' do
+        visit("/stories/#{story.id}.json")
+        response = JSON.parse(page.body)
+        expect(response['success']).to be true
+        expect(response['result']['id']).to eql story.id
+        visit("/stories/#{story.id}22.json")
+        response = JSON.parse(page.body)
+        expect(response['success']).to be false
+        expect(response['error']).to eql "El momento de verdad que estás buscando no existe"
+      end
+
       it 'gets stories by place correctly, gets stories by place with error' do
         story = Story.create(place_id: place.id, picture_id: picture.id, user_id: user.id, description: "test test", vote_plus: 10, vote_minus:5)
         visit("/stories/by_place.json?place_id=202020")

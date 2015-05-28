@@ -1,4 +1,8 @@
 class StoriesController < ApplicationController
+  before_action :set_story, only: [:show]
+
+  def show
+  end
 
   def create
     @story = Story.new(story_params.except(:picture))
@@ -57,7 +61,15 @@ class StoriesController < ApplicationController
   end
 
   private
-  
+    
+    def set_story
+      begin
+        @story = Story.find(params[:id])
+      rescue => error
+        @story = nil
+      end
+    end
+
     def story_params
       params.require(:story).permit(:place_id, :picture_id, :user_id, :description, :vote_plus, :vote_minus, :active, :picture, user_attributes: [:name, :email, :id])
     end
