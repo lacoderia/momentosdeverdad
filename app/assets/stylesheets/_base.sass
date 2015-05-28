@@ -12,6 +12,7 @@
 
 // Import external libraries
 @import "bootstrap"
+@import "bootstrap-compass"
 
 // Import modules styles
 @import "modules/navigation"
@@ -23,7 +24,7 @@ body
   background: $color_red_1 !important
   font-family: "Gotham" !important
   margin: 0
-  padding: 0 0px 66px 0
+  padding: 0 0 66px 0
   position: relative
   user-select: none
   z-index: 1
@@ -32,7 +33,7 @@ body
     padding: 0 0 66px
 
   &:before
-    background: transparent url('/assets/background-desktop.jpg') no-repeat top left fixed
+    background: transparent url('/assets/background-mobile.jpg') no-repeat top left fixed
     background-size: cover
     content: ''
     height: 100vh
@@ -42,6 +43,10 @@ body
     top: 0
     width: 100vw
     z-index: -1
+
+    @include breakpoint(tablet)
+      background: transparent url('/assets/background-desktop.jpg') no-repeat top left fixed
+      background-size: cover
 
 h1, h2, h3, h4, h5, h6
   font-family: "Gotham" !important
@@ -93,7 +98,9 @@ textarea
 .dropdown-menu
   background-color: $color_brown_1
   color: $color_red_1
+  max-height: 400px
   min-width: 300px
+  overflow-y: auto
   text-transform: uppercase
 
   li

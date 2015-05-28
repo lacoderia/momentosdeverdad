@@ -5,17 +5,30 @@
     img.where-label
       display: inline-block
       max-width: 100px
+      vertical-align: top
       width: 100%
+
 
     .where-dropdown
       display: inline-block
-      margin-left: 2rem
-      max-width: 300px
+      margin-left: 0
+      text-align: center
+      vertical-align: top
       width: 100%
+
+      @include breakpoint(tablet)
+        margin-left: 2rem
+        max-width: 300px
+        text-align: left
 
 
   .navigation
-    text-align: right
+    margin-bottom: 24px
+    text-align: center
+
+    @include breakpoint(tablet)
+      margin-bottom: 0px
+      text-align: right
 
     ul
       display: inline-block
