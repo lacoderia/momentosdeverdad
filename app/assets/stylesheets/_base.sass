@@ -23,10 +23,13 @@ body
   background: $color_red_1 !important
   font-family: "Gotham" !important
   margin: 0
-  padding: 0 0 66px
+  padding: 0 0px 66px 0
   position: relative
   user-select: none
   z-index: 1
+
+  @include breakpoint(tablet)
+    padding: 0 0 66px
 
   &:before
     background: transparent url('/assets/background-desktop.jpg') no-repeat top left fixed
