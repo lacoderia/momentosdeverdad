@@ -8,7 +8,7 @@
                 <h3 class="moment-place">En: {{ currentPlace.name }}</h3>
                 <div class="moment-desc">
                     <div class="moment-desc-text">
-                        <textarea ng-bind="moment.description"></textarea>
+                        <textarea ng-bind="moment.description" readonly></textarea>
                     </div>
                     <div class="moment-desc-image">
                         <img ng-src="{{ moment.picture }}" alt="moment.author_name">
@@ -22,8 +22,8 @@
                     </div>
                     <div class="moment-action-share">
                         <span>Compartir</span>
-                        <span class="icon icon-46-facebook share"></span>
-                        <span class="icon icon-twitter share"></span>
+                        <a class="icon icon-46-facebook share" ng-click="shareFB(moment)"></a>
+                        <a class="icon icon-twitter share" ng-href="{{ 'https://twitter.com/intent/tweet?text=Momento de verdad en: ' + currentPlace.name + '&hashtags=EsDeVerdad&url=' + baseURL + '/stories/' + moment.id + '/detail'  }}"></a>
                     </div>
                 </div>
             </div>
