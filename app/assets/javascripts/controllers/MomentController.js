@@ -3,13 +3,8 @@
 momentos.controller('MomentController', ["$scope", "$rootScope", "$location", "$timeout", "usSpinnerService", "MomentService", "PlaceService", function($scope, $rootScope, $location, $timeout, usSpinnerService, MomentService, PlaceService){
 
     // Variables públicas
-    $scope.placesDropdown = [];
-    $scope.currentPlace = undefined;
     $scope.moments = [];
     $scope.baseURL = undefined;
-
-    // Variables privadas
-    var places = [];
 
     // Función que regresa sí hay o no momentos
     $scope.isMomentsEmpty = function(){
@@ -18,7 +13,7 @@ momentos.controller('MomentController', ["$scope", "$rootScope", "$location", "$
 
     // Función que selecciona el lugar actual
     $scope.setPlace = function (index) {
-        $scope.currentPlace = places[index];
+        $scope.currentPlace = $scope.places[index];
         refreshMoments($scope.currentPlace);
     };
 
@@ -74,35 +69,17 @@ momentos.controller('MomentController', ["$scope", "$rootScope", "$location", "$
             })
             .finally(function(){
                 $scope.loadingMoments = false;
-                usSpinnerService.stop('load-moments-spinner');
+                $timeout(function(){
+                    usSpinnerService.stop('load-moments-spinner');
+                }, 0);
             });
     };
 
     // Inicializamos el controlador de la vista
     var initController = function(){
-
-        places = PlaceService.getPlaces();
-
-        if(places.length){
-            $timeout(function(){
-                usSpinnerService.stop('global-spinner');
-            }, 0);
-
-            angular.forEach(places, function(place, $index){
-                $scope.placesDropdown.push({
-                    "text": place.name,
-                    "click": "setPlace($index)"
-                });
-            });
-
-            var nearPlaces = PlaceService.getNearPlaces();
-
-            if(nearPlaces.length){
-                $scope.currentPlace = PlaceService.getPlace(nearPlaces[0]);
-                refreshMoments($scope.currentPlace);
-            }
+        if($scope.currentPlace){
+            refreshMoments($scope.currentPlace);
         }
-
         $scope.baseURL = $location.$$absUrl;
 
     };
@@ -115,7 +92,7 @@ momentos.controller('MomentController', ["$scope", "$rootScope", "$location", "$
             caption: moment.author_name,
             description: moment.description,
             link: $scope.baseURL + 'stories/' + moment.id + '/detail',
-            picture: moment.picture,
+            picture: moment.picture
         }, function(response){
 
         });

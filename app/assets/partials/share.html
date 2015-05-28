@@ -1,5 +1,5 @@
 <div class="container-fluid share-moment-container" ng-controller="ShareController as shareCtrl">
-    <span us-spinner="{fullOverlay: true, position: 'fixed'}" spinner-key="global-spinner" spinner-start-active="true"></span>
+    <span us-spinner="{fullOverlay: true, position: 'fixed'}" spinner-key="global-spinner"></span>
     <ng-include src="'/assets/_navigation_share.html'"></ng-include>
     <div class="section-container row">
         <div class="col-sm-12 col-md-12 col-lg-12 share-moments">
@@ -11,7 +11,7 @@
                         <input type="email" placeholder="Email" name="name" ng-model="newMoment.email" required>
                         <textarea placeholder="¿Qué nos vas a contar?" ng-model="newMoment.description"></textarea>
                         <div class="where-dropdown">
-                            <button type="button" class="btn btn-sm dropdown" data-animation="am-flip-x" bs-dropdown="placesDropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn btn-sm dropdown" data-animation="am-flip-x" bs-dropdown="placesShareDropdown" aria-haspopup="true" aria-expanded="false">
                                 <span ng-if="!newMoment.place">Dónde está sucediendo un momento de verdad</span>
                                 <span ng-if="newMoment.place">{{ newMoment.place.name }}</span>
                             </button>
@@ -22,8 +22,8 @@
                         <input type="submit" style="position: absolute; left: -9999px; width: 1px; height: 1px;"/>
                     </form>
 
-                    <div class="moment-desc-image" ng-click="openMomentPictureSelector($event)">
-                        <input type='file' accept="image/*" onchange="angular.element(this).scope().selectMomentPicture(this)" name="picture" enctype="multipart/form-data" runat="server" style="display: none"/>
+                    <input type='file' accept="image/*" id="image-selector" onchange="angular.element(this).scope().selectMomentPicture(this)" name="picture" enctype="multipart/form-data" runat="server" style="display: none"/>
+                    <div class="moment-desc-image" ng-click="openMomentPictureSelector()" >
                         <div class="picture-container">
                             <div class="default-picture">
                                 CAMARITA

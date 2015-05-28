@@ -1,8 +1,16 @@
 'use strict';
 
-momentos.controller('RootController', ["$scope", "$rootScope", "$window", "usSpinnerService", "MomentService", "PlaceService", function($scope, $rootScope, $window, usSpinnerService, MomentService, PlaceService){
+momentos.controller('RootController', ["$scope", "$rootScope", "$timeout", "$window", "usSpinnerService", "MomentService", "PlaceService", function($scope, $rootScope, $timeout, $window, usSpinnerService, MomentService, PlaceService){
+
+    $scope.places = []
+    $scope.placesDropdown = [];
+    $scope.placesShareDropdown = [];
+    $scope.currentPlace = undefined;
 
     var initController = function(){
+        $timeout(function(){
+            usSpinnerService.spin('global-spinner');
+        }, 0);
 
         //Obtener la posoción actual
         if(navigator.geolocation){
@@ -22,6 +30,32 @@ momentos.controller('RootController', ["$scope", "$rootScope", "$window", "usSpi
                                     PlaceService.getPlacesByLatLon(myPosition.A, myPosition.F)
                                         .success(function(data){
                                             if(data.success){
+                                                $scope.places = PlaceService.getPlaces();
+
+                                                if($scope.places.length){
+                                                    $timeout(function(){
+                                                        usSpinnerService.stop('global-spinner');
+                                                    }, 0);
+
+                                                    angular.forEach($scope.places, function(place, $index){
+                                                        $scope.placesDropdown.push({
+                                                            "text": place.name,
+                                                            "click": "setPlace($index)"
+                                                        });
+
+                                                        $scope.placesShareDropdown.push({
+                                                            "text": place.name,
+                                                            "click": "setPlace($index)"
+                                                        });
+                                                    });
+
+                                                    var nearPlaces = PlaceService.getNearPlaces();
+
+                                                    if(nearPlaces.length){
+                                                        $scope.currentPlace = PlaceService.getPlace(nearPlaces[0]);
+                                                    }
+                                                }
+
                                                 $rootScope.$broadcast('initDataLoaded');
                                             }
                                         })
