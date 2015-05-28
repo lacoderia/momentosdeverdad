@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'icomoon';
-    src:url('/assets/icons/icomoon.eot?mq10p9');
-    src:url('/assets/icons/icomoon.eot?#iefixmq10p9') format('embedded-opentype'),
-    url('/assets/icons/icomoon.ttf?mq10p9') format('truetype'),
-    url('/assets/icons/icomoon.woff?mq10p9') format('woff'),
-    url('/assets/icons/icomoon.svg?mq10p9#icomoon') format('svg');
+    src:url('/assets/icons/icomoon.eot?-jmbkmu');
+    src:url('/assets/icons/icomoon.eot?#iefix-jmbkmu') format('embedded-opentype'),
+    url('/assets/icons/icomoon.ttf?-jmbkmu') format('truetype'),
+    url('/assets/icons/icomoon.woff?-jmbkmu') format('woff'),
+    url('/assets/icons/icomoon.svg?-jmbkmu#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -34,6 +34,9 @@
 }
 .icon-46-facebook:before {
     content: "\e601";
+}
+.icon-camera:before {
+    content: "\e606";
 }
 .icon-twitter:before {
     content: "\e604";

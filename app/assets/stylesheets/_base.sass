@@ -12,7 +12,6 @@
 
 // Import external libraries
 @import "bootstrap"
-@import "bootstrap-compass"
 
 // Import modules styles
 @import "modules/navigation"
@@ -51,6 +50,18 @@ body
 h1, h2, h3, h4, h5, h6
   font-family: "Gotham" !important
 
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder
+  color: $color-red_1
+
+input::-moz-placeholder, textarea::-moz-placeholder
+  color: $color-red_1
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder
+  color: $color-red_1
+
+input:-moz-placeholder, textarea:-moz-placeholder
+  color: $color-red_1
+
 textarea
   resize: none
 
@@ -81,7 +92,7 @@ textarea
 
 .dropdown
   background: $color-red_1
-  border: none
+  border: 1px solid $color-brown_1
   color: $color-brown_1
   padding: 10px 0 10px 10px
   width: 100%

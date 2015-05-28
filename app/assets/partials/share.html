@@ -7,20 +7,22 @@
                 <span us-spinner spinner-key="save-moment-spinner"></span>
                 <div class="moment-desc">
                     <form novalidate name="momentForm" class="form moment-desc-text" ng-submit="saveMoment()">
-                        <label for="name">Nombre:</label>
-                        <input id="name" type="text" placeholder="Nombre" name="name" ng-model="newMoment.name" required>
-
-                        <label for="email">Correo electrónico:</label>
-                        <input id="email" type="email" placeholder="Email" name="name" ng-model="newMoment.email" required>
-
-                        <label for="description">Cuentanos tu momento:</label>
-                        <textarea id="description" placeholder="¿Qué nos vas a contar?" ng-model="newMoment.description"></textarea>
+                        <label for="name">¿Dónde? *</label>
                         <div class="where-dropdown">
                             <button type="button" class="btn btn-sm dropdown" data-animation="am-flip-x" bs-dropdown="placesDropdown" aria-haspopup="true" aria-expanded="false">
                                 <span ng-if="!newMoment.place">Dónde está sucediendo un momento de verdad</span>
                                 <span ng-if="newMoment.place">{{ newMoment.place.name }}</span>
                             </button>
                         </div>
+
+                        <label for="name">Nombre: *</label>
+                        <input id="name" type="text" placeholder="Nombre" name="name" ng-model="newMoment.name" required>
+
+                        <label for="email">Correo electrónico: *</label>
+                        <input id="email" type="email" placeholder="Email" name="name" ng-model="newMoment.email" required>
+
+                        <label for="description">Cuentanos tu momento: *</label>
+                        <textarea id="description" placeholder="¿Qué nos vas a contar?" ng-model="newMoment.description"></textarea>
                         <div ng-show="momentForm.$submitted && !momentForm.$valid">
                             <span>* Todos los campos son requeridos.</span>
                         </div>
@@ -30,9 +32,7 @@
                     <div class="moment-desc-image" ng-click="openMomentPictureSelector($event)">
                         <input type='file' accept="image/*" onchange="angular.element(this).scope().selectMomentPicture(this)" name="picture" enctype="multipart/form-data" runat="server" style="display: none"/>
                         <div class="picture-container">
-                            <div class="default-picture">
-                                CAMARITA
-                            </div>
+                            <div class="default-picture icon-camera"></div>
                             <div class="picture">
                                 <img src="">
                             </div>
