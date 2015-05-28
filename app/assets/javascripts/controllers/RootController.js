@@ -1,6 +1,6 @@
 'use strict';
 
-momentos.controller('RootController', ["$scope", "$rootScope", "$window", "MomentService", "PlaceService", function($scope, $rootScope, $window, MomentService, PlaceService){
+momentos.controller('RootController', ["$scope", "$rootScope", "$window", "usSpinnerService", "MomentService", "PlaceService", function($scope, $rootScope, $window, usSpinnerService, MomentService, PlaceService){
 
     var initController = function(){
 

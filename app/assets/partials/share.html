@@ -1,8 +1,10 @@
 <div class="container-fluid share-moment-container" ng-controller="ShareController as shareCtrl">
+    <span us-spinner="{fullOverlay: true, position: 'fixed'}" spinner-key="global-spinner" spinner-start-active="true"></span>
     <ng-include src="'/assets/_navigation_share.html'"></ng-include>
     <div class="section-container row">
         <div class="col-sm-12 col-md-12 col-lg-12 share-moments">
             <div class="moment">
+                <span us-spinner spinner-key="save-moment-spinner"></span>
                 <div class="moment-desc">
                     <form novalidate name="momentForm" class="form moment-desc-text" ng-submit="saveMoment()">
                         <input type="text" placeholder="Nombre" name="name" ng-model="newMoment.name" required>

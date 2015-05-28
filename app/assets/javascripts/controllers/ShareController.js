@@ -1,6 +1,6 @@
 'use strict';
 
-momentos.controller('ShareController', ["$state", "$scope", "$rootScope", "MomentService", "PlaceService", function($state, $scope, $rootScope, MomentService, PlaceService){
+momentos.controller('ShareController', ["$state", "$scope", "$rootScope", "$timeout", "usSpinnerService", "MomentService", "PlaceService", function($state, $scope, $rootScope, $timeout, usSpinnerService, MomentService, PlaceService){
 
     // Variables públicas
     $scope.placesDropdown = [];
@@ -96,7 +96,11 @@ momentos.controller('ShareController', ["$state", "$scope", "$rootScope", "Momen
 
         $scope.momentForm.$setSubmitted();
 
-        if($scope.momentForm.$valid && $scope.newMoment.picture && $scope.place.id){
+        if($scope.momentForm.$valid && $scope.newMoment.picture && $scope.newMoment.place.id){
+            $timeout(function() {
+                usSpinnerService.spin('save-moment-spinner');
+            }, 0);
+
             var moment = {
                 place_id: $scope.newMoment.place.id,
                 description: $scope.newMoment.description,
@@ -114,16 +118,27 @@ momentos.controller('ShareController', ["$state", "$scope", "$rootScope", "Momen
                 })
                 .error(function(response){
                     console.log(response)
+                })
+                .finally(function(){
+                    $timeout(function() {
+                        usSpinnerService.stop('save-moment-spinner');
+                    }, 0);
                 });
         }
 
     };
 
 
+    // Inicializamos el controlador de la vista
     var initController = function(){
+
         places = PlaceService.getPlaces();
 
         if(places.length){
+            $timeout(function(){
+                usSpinnerService.stop('global-spinner');
+            }, 0);
+
             angular.forEach(places, function(place, $index){
                 $scope.placesDropdown.push({
                     "text": place.name,
@@ -134,9 +149,10 @@ momentos.controller('ShareController', ["$state", "$scope", "$rootScope", "Momen
             var nearPlaces = PlaceService.getNearPlaces();
 
             if(nearPlaces.length){
-                $scope.newMoment.place = PlaceService.getPlace(nearPlaces[0]);
+                $scope.currentPlace = PlaceService.getPlace(nearPlaces[0]);
             }
         }
+
     };
 
     $scope.$on('initDataLoaded', function(){

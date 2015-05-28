@@ -32,6 +32,8 @@
 //= require bower_components/angular-strap/dist/angular-strap.min.js
 //= require bower_components/angular-strap/dist/angular-strap.tpl.min.js
 //= require bower_components/blueimp-load-image/js/load-image.all.min
+//= require bower_components/spin.js/spin
+//= require bower_components/angular-spinner/angular-spinner
 
 //= require app
 
