@@ -31,6 +31,7 @@
 //= require bower_components/angular-google-maps/dist/angular-google-maps.min
 //= require bower_components/angular-strap/dist/angular-strap.min.js
 //= require bower_components/angular-strap/dist/angular-strap.tpl.min.js
+//= require bower_components/angular-facebook/lib/angular-facebook
 //= require bower_components/blueimp-load-image/js/load-image.all.min
 //= require bower_components/spin.js/spin
 //= require bower_components/angular-spinner/angular-spinner
@@ -40,6 +41,7 @@
 // Controllers
 //= require controllers/RootController
 //= require controllers/MomentController
+//= require controllers/MomentDetailController
 //= require controllers/ShareController
 
 // Services
