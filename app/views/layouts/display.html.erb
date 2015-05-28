@@ -10,6 +10,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body ng-controller="RootController as rootCtrl">
+    <span us-spinner="{fullOverlay: true, position: 'fixed'}" spinner-key="global-spinner"></span>
 
 <%= yield %>
 
