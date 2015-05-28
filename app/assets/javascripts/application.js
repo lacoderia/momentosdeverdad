@@ -30,12 +30,13 @@
 //= require bower_components/angular-google-maps/dist/angular-google-maps.min
 //= require bower_components/angular-strap/dist/angular-strap.min.js
 //= require bower_components/angular-strap/dist/angular-strap.tpl.min.js
-
+//= require bower_components/angular-facebook/lib/angular-facebook
 //= require app
 
 // Controllers
 //= require controllers/RootController
 //= require controllers/MomentController
+//= require controllers/MomentDetailController
 //= require controllers/ShareController
 
 // Services

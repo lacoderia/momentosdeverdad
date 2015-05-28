@@ -1,11 +1,12 @@
 'use strict';
 
-momentos.controller('MomentController', ["$scope", "$rootScope", "MomentService", "PlaceService", function($scope, $rootScope, MomentService, PlaceService){
+momentos.controller('MomentController', ["$scope", "$rootScope", "$location", "$window", "MomentService", "PlaceService", function($scope, $rootScope, $location, $window, MomentService, PlaceService){
 
     // Variables públicas
     $scope.placesDropdown = [];
     $scope.currentPlace = undefined;
     $scope.moments = [];
+    $scope.baseURL = undefined;
 
     // Variables privadas
     var places = [];
@@ -89,6 +90,22 @@ momentos.controller('MomentController', ["$scope", "$rootScope", "MomentService"
             }
         }
 
+        $scope.baseURL = $location.$$absUrl;
+
+    };
+
+    $scope.shareFB = function(moment){
+
+        FB.ui({
+            method: 'feed',
+            name: 'Momentos de Verdad en: ' + $scope.currentPlace.name,
+            caption: moment.author_name,
+            description: moment.description,
+            link: $scope.baseURL + 'stories/' + moment.id + '/detail',
+            picture: moment.picture,
+        }, function(response){
+
+        });
     };
 
     $scope.$on('initDataLoaded', function(){

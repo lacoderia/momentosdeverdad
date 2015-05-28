@@ -20,6 +20,15 @@ momentos.factory('MomentService', ['$http', '$q', function($http, $q){
             });
     };
 
+    var getMomentById = function(momentId){
+
+        //var serviceURL = '/stories/by_place.json?place_id=' + placeId;
+
+        return {
+
+        }
+    };
+
     var getMoments = function(){
         return service.moments;
     };
@@ -67,6 +76,7 @@ momentos.factory('MomentService', ['$http', '$q', function($http, $q){
     var service = {
         moments: [],
         getMomentsByPlaceId: getMomentsByPlaceId,
+        getMomentById: getMomentById,
         getMoments: getMoments,
         setMoments: setMoments,
         like: like,
