@@ -1,9 +1,10 @@
 <div class="container-fluid moment-container" ng-controller="MomentDetailController as momentDetailCtrl">
+    <ng-include src="'/assets/_navigation_detail.html'"></ng-include>
     <div class="section-container row">
         <div class="col-sm-12 col-md-12 col-lg-12 moments">
-            <div class="moment">
+            <div class="moment" ng-if="moment">
                 <h3 class="moment-author">{{ moment.author_name }}</h3>
-                <h3 class="moment-place">En: {{ currentPlace.name }}</h3>
+                <h3 class="moment-place">En: {{ moment.place.name }}</h3>
                 <div class="moment-desc">
                     <div class="moment-desc-text">
                         <textarea ng-bind="moment.description"></textarea>
@@ -24,6 +25,14 @@
                         <span class="icon icon-twitter share"></span>
                     </div>
                 </div>
+            </div>
+            <div class="moment" ng-if="momentNotFound">
+                <div class="message">
+                    <p>El momento de verdad que estás buscando no existe.</p>
+                </div>
+            </div>
+            <div class="moment" ng-show="!moment && !momentNotFound">
+                <span us-spinner="{color: '#FFF'}" spinner-key="load-moment-spinner"></span>
             </div>
         </div>
     </div>
