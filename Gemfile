@@ -25,8 +25,7 @@ group :assets do
 # Use CoffeeScript for .js.coffee assets and views
   gem 'coffee-rails', '~> 4.1.0'
 # Imports SASS libraries
-  gem 'compass-rails', github: 'Compass/compass-rails', branch: '2-0-stable'
-  #gem 'compass-rails'
+  gem 'compass-rails'
 end
 
 gem 'pg'

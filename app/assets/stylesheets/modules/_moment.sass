@@ -3,6 +3,12 @@
   margin: 0 auto
   
   .moments
+    padding-left: 0px
+    padding-right: 0px
+
+    @include breakpoint(tablet)
+      padding-left: 15px
+      padding-right: 15px
   
     .moment
       background: $color_red_1
@@ -21,7 +27,6 @@
         text-transform: uppercase
         font-weight: 500
 
-
       .moment-place
         color: $color_brown_1
         font-size: 14px
@@ -34,8 +39,8 @@
         font-size: 0
   
         .moment-desc-text
-          background-color: white
-          margin: 0 0 8px 0
+          background-color: transparent
+          margin: 0 0 16px 0
 
           @include breakpoint(tablet)
             display: inline-block
@@ -46,11 +51,11 @@
           textarea
             background: transparent
             border: none
-            color: #0E0B12
+            color: $color-brown_2
             font-size: 16px
-            font-weight: normal
+            font-weight: 300
             min-height: 100px
-            padding: 16px
+            padding: 0px
             width: 100%
 
             @include breakpoint(tablet)
