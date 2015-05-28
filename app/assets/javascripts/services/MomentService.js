@@ -20,13 +20,21 @@ momentos.factory('MomentService', ['$http', '$q', function($http, $q){
             });
     };
 
+    var getMomentDetail = function() {
+        return service.momentDetail;
+    };
+
     var getMomentById = function(momentId){
 
-        //var serviceURL = '/stories/by_place.json?place_id=' + placeId;
+        var serviceURL = '/stories/' + momentId + '.json';
 
-        return {
-
-        }
+        return $http.get(serviceURL, {})
+            .success(function(data){
+                if(data.success){
+                    service.momentDetail = data.result;
+                    service.momentDetail.voted = false;
+                }
+            });
     };
 
     var saveMoment = function(moment){
@@ -83,13 +91,15 @@ momentos.factory('MomentService', ['$http', '$q', function($http, $q){
 
     var service = {
         moments: [],
+        momentDetail: undefined,
         getMomentsByPlaceId: getMomentsByPlaceId,
+        getMomentDetail: getMomentDetail,
         getMomentById: getMomentById,
         saveMoment: saveMoment,
         getMoments: getMoments,
         setMoments: setMoments,
         like: like,
-        dislike: dislike,
+        dislike: dislike
     };
 
     return service;
