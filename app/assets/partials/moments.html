@@ -26,10 +26,14 @@
                     </div>
                 </div>
             </div>
-            <div class="moment" ng-if="isMomentsEmpty() && !loadingMoments">
+            <div class="moment" ng-if="isMomentsEmpty() && !loadingMoments && isThereSelectedPlace()">
                 <div class="message">
                     <p>Se el primero en compartir tu momento en este lugar.</p>
-                    <a ui-sref="share" class="action-button brown-button small-size">Comparte tu momento</a>
+                </div>
+            </div>
+            <div class="moment" ng-if="!isThereSelectedPlace()">
+                <div class="message">
+                    <p>Selecciona un lugar para ver los momentos que ahí han ocurrido.</p>
                 </div>
             </div>
             <div class="moment" ng-if="loadingMoments">

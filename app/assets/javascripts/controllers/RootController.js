@@ -71,8 +71,53 @@ momentos.controller('RootController', ["$scope", "$rootScope", "$timeout", "$win
                             console.log(error)
                         })
                 },
-                function(response){
-                    console.log(response)
+                function(error){
+
+                    if(error.code == error.PERMISSION_DENIED || error.code == error.POSITION_UNAVAILABLE || error.code == error.PERMISSION_DENIED_TIMEOUT){
+                        
+                        //Se obtiene la lista de lugares
+                        PlaceService.getAllPlaces()
+                            .success(function(data){
+                                if(data.success){
+                                    if(data.result){
+
+                                        $scope.places = PlaceService.getPlaces();
+
+                                        if($scope.places.length){
+                                            $timeout(function(){
+                                                usSpinnerService.stop('global-spinner');
+                                            }, 0);
+
+                                            angular.forEach($scope.places, function(place, $index){
+                                                $scope.placesDropdown.push({
+                                                    "text": place.name,
+                                                    "click": "setPlace($index)"
+                                                });
+
+                                                $scope.placesShareDropdown.push({
+                                                    "text": place.name,
+                                                    "click": "setPlace($index)"
+                                                });
+                                            });
+
+                                        }
+
+                                        $rootScope.$broadcast('initDataLoaded');
+                                    }
+                                }
+                            })
+                            .error(function(error){
+                                console.log('Error al obtener todos los lugares disponibles');
+                                console.log(error)
+                            })
+                    }else{
+                        alert('Error al obtener su posición, por favor intenta de nuevo');
+                    }
+
+                },
+                {
+                    timeout: 30000,
+                    maximumAge: 600000
                 }
             );
         }else{
