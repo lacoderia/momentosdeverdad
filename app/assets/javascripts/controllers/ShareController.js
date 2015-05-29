@@ -29,6 +29,21 @@ momentos.controller('ShareController', ["$state", "$scope", "$rootScope", "$time
         }
     };
 
+    var scaleHorizontal = function(image, imageContainer, ratio) {
+        image.height(imageContainer.height());
+        image.width(imageContainer.height() * ratio);
+    };
+
+    var scaleVertical = function(image, imageContainer, ratio) {
+        image.width(imageContainer.width());
+        image.height(imageContainer.width() / ratio);
+    };
+
+    var scaleVerticalIOS = function(image, imageContainer, ratio) {
+        image.width(imageContainer.height());
+        image.height(imageContainer.width() * ratio);
+    };
+
     $scope.selectMomentPicture = function(element) {
 
         var input = $(element);
@@ -54,45 +69,92 @@ momentos.controller('ShareController', ["$state", "$scope", "$rootScope", "$time
                 loadedImage.onload = function(){
                     var ratio = loadedImage.width / loadedImage.height;
 
-                    // Si la imagen es horizontal, el alto debe ser el del contenedor y el ancho debe ser proporcional
-                    if (loadedImage.width > loadedImage.height) {
-                        image.height(imageContainer.height());
-                        image.width(imageContainer.height() * ratio);
-                    } else {
-                        // Si la imagen es vertical o cuadrada, el ancho debe ser el del contenedor y el alto debe ser proporcional
-                        image.width(imageContainer.width());
-                        image.height(imageContainer.width() / ratio);
-                    }
+                    var iOS = ( navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false );
 
                     loadImage.parseMetaData(
                         input[0].files[0],
                         function (data) {
                             if(data.exif){
                                 var orientation = data.exif.get('Orientation');
+
                                 switch (orientation) {
                                     case 1:
+                                        if (ratio >= 1) {
+                                            scaleHorizontal(image, imageContainer, ratio);
+                                        } else {
+                                            scaleVertical(image, imageContainer, ratio);
+                                        }
                                         break;
                                     case 2:
+                                        if (ratio >= 1) {
+                                            scaleHorizontal(image, imageContainer, ratio);
+                                        } else {
+                                            scaleVertical(image, imageContainer, ratio);
+                                        }
                                         break;
                                     case 3:
-                                        imageContainer.addClass('rotate-right-180');
+                                        if (iOS) {
+                                            scaleHorizontal(image, imageContainer, ratio);
+                                        } else {
+                                            scaleHorizontal(image, imageContainer, ratio);
+                                            imageContainer.addClass('rotate-right-180');
+                                        }
+                                        break;
                                     case 4:
-                                        imageContainer.addClass('rotate-left-180');
+                                        if (iOS) {
+                                            scaleHorizontal(image, imageContainer, ratio);
+                                        } else {
+                                            scaleHorizontal(image, imageContainer, ratio);
+                                            imageContainer.addClass('rotate-left-180');
+                                        }
+                                        break;
                                     case 5:
-                                        imageContainer.addClass('rotate-left-90');
+                                        if (iOS) {
+                                            scaleVerticalIOS(image, imageContainer, ratio);
+                                        } else {
+                                            scaleHorizontal(image, imageContainer, ratio);
+                                            imageContainer.addClass('rotate-left-90');
+                                        }
+                                        break;
                                     case 6:
-                                        imageContainer.addClass('rotate-right-90');
+                                        if (iOS) {
+                                            scaleVerticalIOS(image, imageContainer, ratio);
+                                        } else {
+                                            scaleHorizontal(image, imageContainer, ratio);
+                                            imageContainer.addClass('rotate-right-90');
+                                        }
+                                        break;
                                     case 7:
-                                        imageContainer.addClass('rotate-left-270');
+                                        if (iOS) {
+                                            scaleVerticalIOS(image, imageContainer, ratio);
+                                        } else {
+                                            scaleHorizontal(image, imageContainer, ratio);
+                                            imageContainer.addClass('rotate-left-270');
+                                        }
+                                        break;
                                     case 8:
-                                        imageContainer.addClass('rotate-right-270');
+                                        if (iOS) {
+                                            scaleVerticalIOS(image, imageContainer, ratio);
+                                        } else {
+                                            scaleHorizontal(image, imageContainer, ratio);
+                                            imageContainer.addClass('rotate-right-270');
+                                        }
+                                        break;
                                     default:
                                         break;
 
                                 }
+                            } else {
+                                if (ratio >= 1) {
+                                    scaleHorizontal(image, imageContainer, ratio);
+                                } else {
+                                    scaleVertical(image, imageContainer, ratio);
+                                }
                             }
                         }
                     );
+
+
                 }
 
             };
