@@ -11,6 +11,11 @@ momentos.controller('MomentController', ["$scope", "$rootScope", "$location", "$
         return (!$scope.moments.length)? true : false;
     };
 
+    // Función que regresa si hay un lugar seleccionado
+    $scope.isThereSelectedPlace = function(){
+        return ($scope.currentPlace)? true : false;
+    };
+
     // Función que selecciona el lugar actual
     $scope.setPlace = function (index) {
         $scope.currentPlace = $scope.places[index];
