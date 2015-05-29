@@ -31,7 +31,9 @@
                     <input type='file' accept="image/*" id="image-selector" onchange="angular.element(this).scope().selectMomentPicture(this)" name="picture" enctype="multipart/form-data" runat="server" style="display: none"/>
                     <div class="moment-desc-image" ng-click="openMomentPictureSelector()" >
                         <div class="picture-container">
-                            <div class="default-picture icon-camera"></div>
+                            <div class="default-picture">
+                                <span class="icon-camera"></span>
+                            </div>
                             <div class="picture">
                                 <img src="">
                             </div>

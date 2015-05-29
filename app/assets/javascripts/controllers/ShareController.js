@@ -19,9 +19,14 @@ momentos.controller('ShareController', ["$state", "$scope", "$rootScope", "$time
     };
 
     $scope.openMomentPictureSelector = function() {
-            angular.element('#image-selector').trigger('click');
-
-        return false;
+        var element = document.getElementById('image-selector');
+        if(document.createEvent) {
+            var evt = new MouseEvent("click", {});
+            element.dispatchEvent(evt);
+        }
+        else {
+            element.click();
+        }
     };
 
     $scope.selectMomentPicture = function(element) {
@@ -33,6 +38,7 @@ momentos.controller('ShareController', ["$state", "$scope", "$rootScope", "$time
 
             reader.onload = function (e) {
                 $('.moment-desc-image').find('.default-picture').hide();
+                $('.moment-desc-image').find('.picture').show();
                 var imageContainer = $('.moment-desc-image').find('.picture');
 
                 // Borramos todas las clases que giran la imagen
