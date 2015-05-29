@@ -22,7 +22,7 @@ class PlacesController < ApplicationController
   private
 
     def place_params
-      params.require(:place).permit(:category, :description, :name, :longitude, :latitude)
+      params.require(:place).permit(:category, :description, :name, :longitude, :latitude, :ratio)
     end
 end
 
