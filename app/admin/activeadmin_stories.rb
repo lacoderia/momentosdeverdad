@@ -76,7 +76,7 @@ ActiveAdmin.register Story, :as => "Historias" do
       story.place.name
     end
     column :picture, :class => "photo_thumb" do |story|
-      link_to( (image_tag "#{story.picture.source}"), "#{story.picture.source}", :target=>"_blank" )
+      link_to( (image_tag "#{story.picture.source}"), "#{story.picture.source}", :target=>"_blank" ) if story.picture
     end
     column :description
     column :vote_plus
