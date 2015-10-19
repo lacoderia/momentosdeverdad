@@ -26,9 +26,15 @@ momentos.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', fu
             url: "/share",
             templateUrl: '/assets/share.html',
             authenticationRequired: false
-        }).state('moment',{
+        })
+        .state('moment',{
             url: "/stories/:id/detail",
             templateUrl: '/assets/moment_detail.html',
+            authenticationRequired: false
+        })
+        .state('terms',{
+            url: "/terms",
+            templateUrl: '/assets/terms.html',
             authenticationRequired: false
         });
 

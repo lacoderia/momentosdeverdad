@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
   root 'display#index'
   get "share", :to => "display#index"
+  get "terms", :to => "display#index"
   get "stories/:id/detail", :to => "display#index"
 
 end

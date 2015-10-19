@@ -23,6 +23,7 @@
 //= require vendor/jquery.rotate.1-1
 //= require bower_components/moment/moment
 //= require bower_components/moment/locale/es
+//= require bower_components/fancybox/source/jquery.fancybox.pack
 
 // Angular libraries
 //= require bower_components/angular/angular.min
