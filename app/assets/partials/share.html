@@ -14,6 +14,17 @@
                             </button>
                         </div>
 
+                        <div class="moment-desc-image visible-xs" ng-click="openMomentPictureSelector()" >
+                            <div class="picture-container">
+                                <div class="default-picture">
+                                    <span class="icon-camera"></span>
+                                </div>
+                                <div class="picture">
+                                    <img src="">
+                                </div>
+                            </div>
+                        </div>
+
                         <label for="name">Nombre: *</label>
                         <input id="name" type="text" placeholder="Nombre" name="name" ng-model="newMoment.name" required>
 
@@ -29,7 +40,7 @@
                     </form>
 
                     <input type='file' accept="image/*" id="image-selector" onchange="angular.element(this).scope().selectMomentPicture(this)" name="picture" enctype="multipart/form-data" runat="server" style="display: none"/>
-                    <div class="moment-desc-image" ng-click="openMomentPictureSelector()" >
+                    <div class="moment-desc-image hidden-xs" ng-click="openMomentPictureSelector()" >
                         <div class="picture-container">
                             <div class="default-picture">
                                 <span class="icon-camera"></span>

@@ -41,10 +41,12 @@
 
 // Controllers
 //= require controllers/RootController
+//= require controllers/ManifestController
 //= require controllers/MomentController
 //= require controllers/MomentDetailController
 //= require controllers/ShareController
 
 // Services
+//= require services/ManifestService
 //= require services/MomentService
 //= require services/PlaceService

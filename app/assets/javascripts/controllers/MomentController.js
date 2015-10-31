@@ -105,8 +105,6 @@ momentos.controller('MomentController', ["$scope", "$rootScope", "$location", "$
 
     $scope.$on('initDataLoaded', function(){
         initController();
-
-        $(".fancybox").fancybox().click();
     });
 
     initController();
