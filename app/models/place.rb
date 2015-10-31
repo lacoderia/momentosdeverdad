@@ -18,5 +18,10 @@ class Place < ActiveRecord::Base
     end
     return result    
   end
+
+  def self.nearest_by_lat_long lat, long
+    places = Place.available
+    return places.sort_by {|place| place.distance_from([lat, long])}
+  end
   
 end

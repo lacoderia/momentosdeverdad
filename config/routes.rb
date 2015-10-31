@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     end
     collection do
       get 'by_lat_long'
+      get 'nearest_by_lat_long'
       get 'available'
     end
   end

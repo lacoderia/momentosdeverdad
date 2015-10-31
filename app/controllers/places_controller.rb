@@ -8,6 +8,10 @@ class PlacesController < ApplicationController
     @places = Place.by_lat_long params[:lat], params[:long]
   end
 
+  def nearest_by_lat_long
+    @places = Place.nearest_by_lat_long params[:lat], params[:long]
+  end
+
   def active
     place = Place.find(params[:id])
     if place

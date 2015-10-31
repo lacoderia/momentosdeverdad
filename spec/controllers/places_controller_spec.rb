@@ -52,6 +52,23 @@ feature 'PlacesController' do
 
     end
 
+    context 'nearest_by_lat_long' do
+
+      it "returns places ordered by lat-long" do
+        
+        place_3.update_attribute(:active, true)
+
+        visit("/places/nearest_by_lat_long.json?lat=#{19.5155}&long=#{-99.1701}")
+        response = JSON.parse(page.body)
+        expect(response['success']).to be true
+        expect(response['result']['places'].first['id']).to eql place_3.id
+        expect(response['result']['places'].second['id']).to eql place_1.id
+        expect(response['result']['places'].third['id']).to eql place_2.id
+
+      end
+
+    end
+
   end
 
 end
