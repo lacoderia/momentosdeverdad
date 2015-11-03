@@ -1,6 +1,6 @@
 'use strict';
 
-momentos.controller('ShareController', ["$state", "$scope", "$rootScope", "$timeout", "usSpinnerService", "MomentService", "PlaceService", function($state, $scope, $rootScope, $timeout, usSpinnerService, MomentService, PlaceService){
+momentos.controller('ShareController', ["$state", "$scope", "$rootScope", "$timeout", "$window", "usSpinnerService", "MomentService", "PlaceService", function($state, $scope, $rootScope, $timeout, $window, usSpinnerService, MomentService, PlaceService){
 
     // Variables públicas
 
@@ -204,7 +204,11 @@ momentos.controller('ShareController', ["$state", "$scope", "$rootScope", "$time
 
     // Inicializamos el controlador de la vista
     var initController = function(){
+        var nearestPlaces = PlaceService.getNearestPlaces();
 
+        if(nearestPlaces.length){
+            $scope.newMoment.place = PlaceService.getPlace(nearestPlaces[0]);
+        }
     };
 
     $scope.$on('initDataLoaded', function(){
