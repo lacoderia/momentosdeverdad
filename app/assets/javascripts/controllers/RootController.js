@@ -16,7 +16,7 @@ momentos.controller('RootController', ["$scope", "$rootScope", "$timeout", "$win
         if(navigator.geolocation){
             $window.navigator.geolocation.getCurrentPosition(
                 function(position){
-
+                    
                     //Se obtiene la posición actual con el API de Google Maps
                     var myPosition = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
@@ -27,7 +27,7 @@ momentos.controller('RootController', ["$scope", "$rootScope", "$timeout", "$win
                                 if(data.result){
 
                                     //Se obtienen los lugares cercanos
-                                    PlaceService.getPlacesByLatLon(myPosition.A, myPosition.F)
+                                    PlaceService.getNearestPlacesByLatLon(myPosition.lat(), myPosition.lng())
                                         .success(function(data){
                                             if(data.success){
                                                 $scope.places = PlaceService.getPlaces();
@@ -49,10 +49,10 @@ momentos.controller('RootController', ["$scope", "$rootScope", "$timeout", "$win
                                                         });
                                                     });
 
-                                                    var nearPlaces = PlaceService.getNearPlaces();
+                                                    var nearestPlaces = PlaceService.getNearestPlaces();
 
-                                                    if(nearPlaces.length){
-                                                        $scope.currentPlace = PlaceService.getPlace(nearPlaces[0]);
+                                                    if(nearestPlaces.length){
+                                                        $scope.currentPlace = PlaceService.getPlace(nearestPlaces[0]);
                                                     }
                                                 }
 

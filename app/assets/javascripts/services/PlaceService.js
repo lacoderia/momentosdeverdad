@@ -19,6 +19,22 @@ momentos.factory('PlaceService', ['$http', '$q', function($http, $q){
 
     };
 
+    var getNearestPlacesByLatLon = function(lat, lon){
+
+        var serviceURL = '/places/nearest_by_lat_long.json?lat=' + lat + '&long=' + lon;
+
+        return $http.get(serviceURL, {})
+            .success(function(data){
+
+                if(data.success){
+                    if(data.result){
+                        service.nearestPlaces = data.result.places;
+                    }
+                }
+            });
+
+    };
+
     var getAllPlaces = function () {
 
         var serviceURL = '/places/available.json';
@@ -42,6 +58,10 @@ momentos.factory('PlaceService', ['$http', '$q', function($http, $q){
         return service.nearPlaces;
     };
 
+    var getNearestPlaces = function(){
+        return service.nearestPlaces;
+    };
+
     var getPlace = function(place){
         currentPlace = undefined;
 
@@ -58,10 +78,13 @@ momentos.factory('PlaceService', ['$http', '$q', function($http, $q){
     var service = {
         places: [],
         nearPlaces: [],
+        nearestPlaces: [],
         getPlacesByLatLon: getPlacesByLatLon,
+        getNearestPlacesByLatLon: getNearestPlacesByLatLon,
         getAllPlaces: getAllPlaces,
         getPlaces: getPlaces,
         getNearPlaces: getNearPlaces,
+        getNearestPlaces: getNearestPlaces,
         getPlace: getPlace
     }
 
